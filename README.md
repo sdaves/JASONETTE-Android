@@ -15,8 +15,9 @@ Looking for an iOS version? [See here](https://www.github.com/Jasonette/JASONETT
 
 # One command build using Docker
 
-    #clone this repo, change directory into repo, then run the following
+    # clone this repo, change directory into repo, then run the following
     docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm beevelop/android /bin/sh -c 'mkdir "$ANDROID_HOME/licenses" && echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"  && ./gradlew build --stacktrace'
+    # the output apk files will be in ./app/build/outputs/apk/
 
 ## ★ Jasonette fetches this JSON markup from a server:
 
