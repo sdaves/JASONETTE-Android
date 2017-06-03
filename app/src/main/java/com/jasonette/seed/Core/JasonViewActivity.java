@@ -214,29 +214,6 @@ public class JasonViewActivity extends AppCompatActivity {
 
         // Create model
         model = new JasonModel(url, intent, this);
-
-        // Setup Toolbar
-        
-        final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
-
-        boolean showToolbar = true;
-        
-        if (head.has("style")) {
-            final JSONObject style = head.getJSONObject("style");
-
-            if (style.has("hide")) {
-                final boolean hide = (boolean)style.get("hide");
-                if (hide) {
-                    showToolbar = false;
-                }
-            }
-        }
-        
-        if (showToolbar) {
-            setSupportActionBar(toolbar);
-        } else {
-            getSupportActionBar().hide();
-        }
         
         Uri uri = getIntent().getData();
         if(uri != null && uri.getHost().contains("oauth")) {
@@ -287,6 +264,29 @@ public class JasonViewActivity extends AppCompatActivity {
 
             // Fetch
             model.fetch();
+        }
+        
+        // Setup Toolbar
+        
+        final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
+        boolean showToolbar = true;
+        
+        if (head.has("style")) {
+            final JSONObject style = head.getJSONObject("style");
+
+            if (style.has("hide")) {
+                final boolean hide = (boolean)style.get("hide");
+                if (hide) {
+                    showToolbar = false;
+                }
+            }
+        }
+        
+        if (showToolbar) {
+            setSupportActionBar(toolbar);
+        } else {
+            getSupportActionBar().hide();
         }
 
     }
