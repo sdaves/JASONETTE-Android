@@ -155,8 +155,8 @@ public class JasonViewActivity extends AppCompatActivity {
             toolbar = new Toolbar(this);
             toolbar.setTitle("");
         }
-        setSupportActionBar(toolbar);
-
+        
+        
         // 4. Create body.sections
 
         // 4.1. RecyclerView
@@ -215,6 +215,29 @@ public class JasonViewActivity extends AppCompatActivity {
         // Create model
         model = new JasonModel(url, intent, this);
 
+        // Setup Toolbar
+        
+        final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
+        boolean showToolbar = true;
+        
+        if (head.has("style")) {
+            final JSONObject style = head.getJSONObject("style");
+
+            if (style.has("hide")) {
+                final boolean hide = (boolean)style.get("hide");
+                if (hide) {
+                    showToolbar = false;
+                }
+            }
+        }
+        
+        if (showToolbar) {
+            setSupportActionBar(toolbar);
+        } else {
+            getSupportActionBar().hide();
+        }
+        
         Uri uri = getIntent().getData();
         if(uri != null && uri.getHost().contains("oauth")) {
             loaded = true; // in case of oauth process we need to set loaded to true since we know it's already been loaded.
@@ -1371,17 +1394,6 @@ public class JasonViewActivity extends AppCompatActivity {
 
                 if (model.jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
-                    
-                    if (head.has("style")) {
-                        final JSONObject style = head.getJSONObject("style");
-                        
-                        if (style.has("hide")) {
-                            final boolean hide = (boolean)style.get("hide");
-                            if (hide) {
-                                getSupportActionBar().hide();
-                            }
-                        }
-                    }
                     
                     if (head.has("data")) {
                         if (head.has("templates")) {
