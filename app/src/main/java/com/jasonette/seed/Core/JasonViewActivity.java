@@ -1371,6 +1371,18 @@ public class JasonViewActivity extends AppCompatActivity {
 
                 if (model.jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+                    
+                    if (head.has("style")) {
+                        final JSONObject style = head.getJSONObject("style");
+                        
+                        if (style.has("hide")) {
+                            final bool hide = (boo)style.get("hide");
+                            if (hide) {
+                                getSupportActionBar().hide();
+                            }
+                        }
+                    }
+                    
                     if (head.has("data")) {
                         if (head.has("templates")) {
                             if (head.getJSONObject("templates").has("body")) {
