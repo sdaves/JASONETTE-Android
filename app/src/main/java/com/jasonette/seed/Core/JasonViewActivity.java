@@ -1376,7 +1376,7 @@ public class JasonViewActivity extends AppCompatActivity {
                         final JSONObject style = head.getJSONObject("style");
                         
                         if (style.has("hide")) {
-                            final bool hide = (boo)style.get("hide");
+                            final boolean hide = (boolean)style.get("hide");
                             if (hide) {
                                 getSupportActionBar().hide();
                             }
