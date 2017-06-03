@@ -266,33 +266,10 @@ public class JasonViewActivity extends AppCompatActivity {
             model.fetch();
         }
         
-        // Setup Toolbar
+        // Hide Toolbar
         
-        try {
-            final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
-
-            boolean showToolbar = true;
-
-            if (head.has("style")) {
-                final JSONObject style = head.getJSONObject("style");
-
-                if (style.has("hide")) {
-                    final boolean hide = (boolean)style.get("hide");
-                    if (hide) {
-                        showToolbar = false;
-                    }
-                }
-            }
-
-            if (showToolbar) {
-                setSupportActionBar(toolbar);
-            } else {
-                getSupportActionBar().hide();
-            }
-        } catch (JSONException e) {
-            Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
-        }
-
+        getSupportActionBar().hide();
+           
     }
 
 
